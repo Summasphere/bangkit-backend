@@ -1,7 +1,7 @@
 FROM node:20.12.0-alpine
 
 RUN apk add --no-cache bash
-RUN npm i -g @nestjs/cli typescript ts-node
+RUN npm i -g @nestjs/cli typescript ts-node prisma
 
 COPY package*.json /tmp/app/
 RUN cd /tmp/app && npm install
@@ -17,6 +17,7 @@ RUN sed -i 's/\r//g' /opt/startup.relational.dev.sh
 
 WORKDIR /usr/src/app
 RUN if [ ! -f .env ]; then cp env-example-relational .env; fi
+RUN npm run prisma:generate
 RUN npm run build
 
 CMD ["/opt/startup.relational.dev.sh"]
