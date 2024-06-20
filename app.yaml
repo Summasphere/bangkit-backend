@@ -6,9 +6,11 @@ env: flex
 #   forwarded_ports:
 #     - 8080/tcp
 
-manual_scaling:
-  instances: 1
+instance_class: F1
+automatic_scaling:
+  max_instances: 1
+  min_instances: 0 
 resources:
   cpu: 1
-  memory_gb: 2
+  memory_gb: 1
   disk_size_gb: 10
